@@ -1,4 +1,4 @@
-package com.alkemy.disney.disney.Entity;
+package com.alkemy.disney.disney.entity;
 
 import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
@@ -32,7 +32,7 @@ public class MovieEntity {
     )
     private Set<CharacterEntity> characters = new HashSet<>();
 
-    @ManyToOne(cascade = CascadeType.REMOVE)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "genre_id", insertable=false, updatable = false)
     private GenreEntity genre;
 
