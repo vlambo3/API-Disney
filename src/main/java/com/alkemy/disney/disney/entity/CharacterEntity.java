@@ -25,10 +25,12 @@ public class CharacterEntity {
 
     public void addMovie(MovieEntity movie) {
         this.movies.add(movie);
+        //movie.getCharacters().add(this);
     }
 
     public void removeMovie(MovieEntity movie) {
         this.movies.remove(movie);
+        //movie.getCharacters().remove(this);
     }
 
 }
