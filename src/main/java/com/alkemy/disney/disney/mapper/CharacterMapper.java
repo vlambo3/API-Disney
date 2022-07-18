@@ -52,7 +52,15 @@ public class CharacterMapper {
         return entities;
     }
 
-    public Set<CharacterDTO> characterEntitySet2DTOList(Collection<CharacterEntity> entities, boolean loadMovies)  {
+    public List<CharacterDTO> characterEntitySet2DTOList(Collection<CharacterEntity> entities, boolean loadMovies)  {
+        List<CharacterDTO> dtos = new ArrayList<>();
+        for (CharacterEntity entity: entities)  {
+            dtos.add(this.characterEntity2DTO(entity, loadMovies));
+        }
+        return dtos;
+    }
+
+    public Set<CharacterDTO> characterEntitySet2DTOSet(Collection<CharacterEntity> entities, boolean loadMovies)  {
         Set<CharacterDTO> dtos = new HashSet<>();
         for (CharacterEntity entity: entities)  {
             dtos.add(this.characterEntity2DTO(entity, loadMovies));

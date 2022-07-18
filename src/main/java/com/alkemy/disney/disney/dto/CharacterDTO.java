@@ -11,7 +11,7 @@ public class CharacterDTO {
     private Long id;
     private String image;
     private String name;
-    private int age;
+    private String age;
     private Double weight;
     private String history;
     private List<MovieDTO> movies;

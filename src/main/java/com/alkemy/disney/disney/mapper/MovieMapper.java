@@ -42,7 +42,7 @@ public class MovieMapper {
         dto.setQualification(entity.getQualification());
         //dto.setCharacters(entity.getCharacters());
         if(loadCharacters) {
-            Set<CharacterDTO> charactersDTO = this.characterMapper.characterEntitySet2DTOList(entity.getCharacters(),false);
+            Set<CharacterDTO> charactersDTO = this.characterMapper.characterEntitySet2DTOSet(entity.getCharacters(),false);
             dto.setCharacters(charactersDTO);
         }
         dto.setGenre(entity.getGenre());

@@ -9,6 +9,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+import java.util.Set;
+
 @RestController
 @RequestMapping("movies")
 public class MovieController {
@@ -38,6 +41,27 @@ public class MovieController {
     public ResponseEntity<Void> addCharacter(@PathVariable Long idMovie, @PathVariable Long idCharacter) {
         movieService.addCharacter(idMovie, idCharacter);
         return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @PostMapping("/{id}/character/{idCharacter}")
+    public ResponseEntity<Void> removeCharacter(@PathVariable Long idMovie, @PathVariable Long idCharacter) {
+        movieService.removeCharacter(idMovie, idCharacter);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<MovieDTO> getDetailsById(@PathVariable Long id) {
+        MovieDTO movie = movieService.getDetailsById(id);
+        return ResponseEntity.ok(movie);
+    }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<List<MovieDTO>> getDetailsByFilters(
+            @RequestParam(required = false) String name,
+            @RequestParam(required = false) Long idGenre,
+            @RequestParam(required = false, defaultValue = "ASC") String order) {
+        List<MovieDTO> movies = this.movieService.getByFilters(name, idGenre, order);
+        return ResponseEntity.ok(movies);
     }
 
 }

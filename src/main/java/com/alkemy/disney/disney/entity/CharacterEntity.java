@@ -20,7 +20,7 @@ public class CharacterEntity {
 
     private String image;
     private String name;
-    private int age;
+    private String age;
     private Double weight;
     private String history;
 
