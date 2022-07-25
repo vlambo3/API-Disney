@@ -49,12 +49,10 @@ public class MovieServiceImpl implements MovieService {
     }
 
     public MovieDTO editMovie(Long id, MovieDTO dto) {
-        Optional<MovieEntity> movie = movieRepository.findById(id);
-        if(!movie.isPresent()) {
-            throw new EntityNotFoundException( ErrorEnum.ID_MOVIE_NOT_FOUND.getMessage());
-        }
-        movieMapper.movieEntityRefreshValues(movie.get(), dto);
-        MovieEntity movieEdited = movieRepository.save(movie.get());
+        MovieEntity movieFromDB = this.movieRepository.findById(id).orElseThrow(
+                ()-> new EntityNotFoundException( ErrorEnum.ID_MOVIE_NOT_FOUND.getMessage()));
+        movieMapper.movieEntityRefreshValues(movieFromDB, dto);
+        MovieEntity movieEdited = movieRepository.save(movieFromDB);
         return movieMapper.movieEntity2DTO(movieEdited, true);
     }
 
