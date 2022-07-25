@@ -1,11 +1,14 @@
 package com.alkemy.disney.disney.dto;
 
-import com.alkemy.disney.disney.entity.CharacterEntity;
 import com.alkemy.disney.disney.entity.GenreEntity;
+import com.sun.istack.NotNull;
 import lombok.Getter;
 import lombok.Setter;
+
+import javax.validation.constraints.Max;
+import javax.validation.constraints.Min;
+import javax.validation.constraints.Pattern;
 import java.util.Date;
-import java.util.HashSet;
 import java.util.Set;
 
 @Getter
@@ -13,8 +16,12 @@ import java.util.Set;
 public class MovieDTO {
     private Long id;
     private String image;
+    @NotNull
     private String title;
+    @Pattern(regexp = "\\d{4}", message = "The format should be yyyy")
     private Date creationDate;
+    @Min(1)
+    @Max(5)
     private Double qualification;
     private Set<CharacterDTO> characters;
     private GenreEntity genre;

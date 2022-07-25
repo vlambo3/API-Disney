@@ -4,14 +4,18 @@ import lombok.Data;
 
 @Data
 public class MovieFiltersDTO {
-    private String name;
+    private String title;
     private Long genreId;
     private String order;
 
-    public MovieFiltersDTO(String name, Long genreId, String order) {
-        this.name = name;
+    public MovieFiltersDTO(String title, Long genreId, String order) {
+        this.title = title;
         this.genreId = genreId;
         this.order = order;
+    }
+
+    public MovieFiltersDTO() {
+
     }
 
     public boolean isASC() { return this.order.compareToIgnoreCase("ASC") == 0; }

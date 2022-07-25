@@ -23,15 +23,16 @@ public class MovieSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
-            if (StringUtils.hasLength(filtersDTO.getName())) {
+            if (StringUtils.hasLength(filtersDTO.getTitle())) {
                 predicates.add(
                         criteriaBuilder.like(
                                 criteriaBuilder.lower(root.get("name")),
-                                "%" + filtersDTO.getName().toLowerCase() + "%"
+                                "%" + filtersDTO.getTitle().toLowerCase() + "%"
                         )
                 );
             }
 
+            /*
             if(StringUtils.hasLength(filtersDTO.getGenreId())) {
 
                 String gen = genreRepository.getReferenceById(filtersDTO.getGenreId()).toString();
@@ -39,7 +40,7 @@ public class MovieSpecification {
                 predicates.add(
                         criteriaBuilder.like(
                                 criteriaBuilder.equal(root.get("genre"), genreRepository.getReferenceById(filtersDTO.getGenreId()));
-            }
+            }*/
 
             //remove duplicates
             query.distinct(true);

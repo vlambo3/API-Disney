@@ -29,6 +29,25 @@ public class CharacterEntity {
     private List<MovieEntity> movies = new ArrayList<>();
 
     private boolean deleted = Boolean.FALSE;
+
+    @Override
+    public boolean equals(Object obj){
+        if(obj == null) {
+            return false;
+        }
+        if(!(obj instanceof CharacterEntity)) {
+            return false;
+        } else {
+            CharacterEntity characterEntity = (CharacterEntity) obj;
+            if(this.getId()!=null) {
+                return this.getId().equals(characterEntity.getId());
+            } else {
+                return false;
+            }
+        }
+    }
+
+    /*
     public void addMovie(MovieEntity movie) {
         this.movies.add(movie);
         //movie.getCharacters().add(this);
@@ -37,6 +56,6 @@ public class CharacterEntity {
     public void removeMovie(MovieEntity movie) {
         this.movies.remove(movie);
         //movie.getCharacters().remove(this);
-    }
+    }*/
 
 }
