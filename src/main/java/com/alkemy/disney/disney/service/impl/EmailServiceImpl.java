@@ -1,5 +1,6 @@
 package com.alkemy.disney.disney.service.impl;
 
+import com.alkemy.disney.disney.enumuration.ErrorEnum;
 import com.alkemy.disney.disney.service.EmailService;
 
 import com.sendgrid.Method;
@@ -14,6 +15,8 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
+import javax.validation.constraints.Null;
 import java.io.IOException;
 
 @Service
@@ -53,7 +56,7 @@ public class EmailServiceImpl implements EmailService {
             System.out.println(response.getBody());
             System.out.println(response.getHeaders());
         } catch (IOException ex) {
-            System.out.println("Error trying to send email");
+            new IOException( ErrorEnum.ERROR_TRYING_TO_SEND_MAIL.getMessage());
         }
     }
 

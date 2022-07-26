@@ -32,15 +32,12 @@ public class MovieSpecification {
                 );
             }
 
-            /*
-            if(StringUtils.hasLength(filtersDTO.getGenreId())) {
-
-                String gen = genreRepository.getReferenceById(filtersDTO.getGenreId()).toString();
+            if(StringUtils.hasLength(filtersDTO.getGenreId().toString())) {
 
                 predicates.add(
-                        criteriaBuilder.like(
-                                criteriaBuilder.equal(root.get("genre"), genreRepository.getReferenceById(filtersDTO.getGenreId()));
-            }*/
+                                criteriaBuilder.equal(root.get("genre"), filtersDTO.getGenreId())
+                );
+            }
 
             //remove duplicates
             query.distinct(true);
