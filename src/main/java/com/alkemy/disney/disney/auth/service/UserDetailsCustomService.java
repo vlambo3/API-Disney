@@ -9,6 +9,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -33,7 +34,10 @@ public class UserDetailsCustomService implements UserDetailsService {
     public boolean save(UserDTO userDTO) {
         UserEntity userEntity = new UserEntity();
         userEntity.setUsername(userDTO.getUsername());
-        userEntity.setPassword(userDTO.getPassword());
+
+        String encripted = new BCryptPasswordEncoder().encode(userDTO.getPassword());
+        userEntity.setPassword(encripted);
+
         userEntity = this.userRepository.save(userEntity);
         if(userEntity != null) {
             emailService.sendWelcomeEmailTo(userEntity.getUsername());
