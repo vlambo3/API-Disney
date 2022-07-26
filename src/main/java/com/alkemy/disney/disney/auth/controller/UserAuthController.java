@@ -1,4 +1,4 @@
-package com.alkemy.disney.disney.auth.entity.controller;
+package com.alkemy.disney.disney.auth.controller;
 
 import com.alkemy.disney.disney.auth.dto.AuthenticationRequest;
 import com.alkemy.disney.disney.auth.dto.AuthenticationResponse;
@@ -12,9 +12,7 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.web.authentication.AbstractAuthenticationTargetUrlRequestHandler;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,16 +23,16 @@ import javax.validation.Valid;
 @RestController
 @RequestMapping("/auth")
 public class UserAuthController {
-    private UserDetailsCustomService userDetailsCustomService;
+    private UserDetailsCustomService userDetailsService;
     private AuthenticationManager authenticationManager;
     private JwtUtils jwtTokenUtil;
 
     @Autowired
     public UserAuthController(
-            UserDetailsCustomService userDetailsCustomService,
+            UserDetailsCustomService userDetailsService,
             AuthenticationManager authenticationManager,
             JwtUtils jwtTokenUtil) {
-        this.userDetailsCustomService = userDetailsCustomService;
+        this.userDetailsService = userDetailsService;
         this.authenticationManager = authenticationManager;
         this.jwtTokenUtil = jwtTokenUtil;
     }
