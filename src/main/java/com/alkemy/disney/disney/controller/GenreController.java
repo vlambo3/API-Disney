@@ -17,8 +17,6 @@ public class GenreController {
     @Autowired
     private GenreService genreService;
 
-
-
     //endpoint para guardar/crear generos
     @PostMapping
     public ResponseEntity<GenreDTO>save(@RequestBody GenreDTO genre) {

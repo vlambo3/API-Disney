@@ -11,6 +11,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 @EnableWebSecurity
@@ -21,17 +22,16 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Autowired //sobreescribimos el método que viene por defecto
-    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+    @Override //sobreescribimos el método que viene por defecto
+     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.
-                userDetailsService(userDetailsCustomService)
-                .passwordEncoder(new BCryptPasswordEncoder());
+                userDetailsService(userDetailsCustomService);
     }
 
-    //@Bean //para poder encodear la password, pero le vamos a decir que no use encoder
-    //public PasswordEncoder passwordEncoder() {
-    //    return NoOpPasswordEncoder.getInstance();
-    // }
+    @Bean //para poder encodear la password, pero le vamos a decir que no use encoder
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 
 
     @Override
