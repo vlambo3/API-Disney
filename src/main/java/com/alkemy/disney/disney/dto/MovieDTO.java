@@ -19,7 +19,7 @@ public class MovieDTO {
     @NotNull
     private String title;
     @Pattern(regexp = "\\d{4}", message = "The format should be yyyy")
-    private Date creationDate;
+    private String creationDate;
     @Min(1)
     @Max(5)
     private Double qualification;

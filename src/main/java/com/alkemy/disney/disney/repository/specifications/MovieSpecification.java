@@ -26,7 +26,7 @@ public class MovieSpecification {
             if (StringUtils.hasLength(filtersDTO.getTitle())) {
                 predicates.add(
                         criteriaBuilder.like(
-                                criteriaBuilder.lower(root.get("name")),
+                                criteriaBuilder.lower(root.get("title")),
                                 "%" + filtersDTO.getTitle().toLowerCase() + "%"
                         )
                 );
@@ -43,7 +43,7 @@ public class MovieSpecification {
             query.distinct(true);
 
             //Order resolver
-            String orderByFieldNames = "name";
+            String orderByFieldNames = "creationDate";
             query.orderBy(
                     filtersDTO.isASC() ?
                             criteriaBuilder.asc(root.get(orderByFieldNames)):

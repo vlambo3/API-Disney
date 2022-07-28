@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
@@ -29,9 +31,8 @@ public class MovieMapper {
         dto.setId(entity.getId());
         dto.setImage(entity.getImage());
         dto.setTitle(entity.getTitle());
-        dto.setCreationDate(entity.getCreationDate());
+        dto.setCreationDate(entity.getCreationDate().toString());
         dto.setQualification(entity.getQualification());
-        //dto.setCharacters(entity.getCharacters());
         if(loadCharacters) {
             Set<CharacterDTO> charactersDTO = this.characterMapper.characterEntitySet2DTOSet(entity.getCharacters(),true);
             dto.setCharacters(charactersDTO);
@@ -44,12 +45,17 @@ public class MovieMapper {
         MovieBasicDTO dto = new MovieBasicDTO();
         dto.setImage(entity.getImage());
         dto.setTitle(entity.getTitle());
-        dto.setCreationDate(entity.getCreationDate());
         return dto;
     }
 
     public void movieEntityRefreshValues(MovieEntity entity, MovieDTO dto) {
         convertBasicValues(entity,dto);
+    }
+
+    private LocalDate string2LocalDate(String stringDate) {
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+        LocalDate date = LocalDate.parse(stringDate, formatter);
+        return date;
     }
 
     public List<MovieDTO> movieEntityList2DTOList(List<MovieEntity> entities, boolean loadCharacters) {
@@ -71,9 +77,10 @@ public class MovieMapper {
     public void convertBasicValues(MovieEntity entity, MovieDTO dto) {
         entity.setImage(dto.getImage());
         entity.setTitle(dto.getTitle());
-        entity.setCreationDate(dto.getCreationDate());
+        entity.setCreationDate(
+                this.string2LocalDate(dto.getCreationDate().toString()));
         entity.setQualification(dto.getQualification());
-        entity.setGenre(dto.getGenre());
+        entity.setGenreId(dto.getGenreId());
     }
 
 }

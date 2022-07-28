@@ -30,8 +30,7 @@ public class CharacterServiceImpl implements CharacterService {
 
 
     public CharacterDTO save(CharacterDTO dto) {
-        CharacterEntity entity = characterMapper.characterDTO2CharacterEntity(dto);
-        CharacterEntity entitySaved = characterRepository.save(entity);
+        CharacterEntity entitySaved = characterRepository.save(characterMapper.characterDTO2CharacterEntity(dto));
         return characterMapper.characterEntity2DTO(entitySaved, true);
     }
 
@@ -40,8 +39,7 @@ public class CharacterServiceImpl implements CharacterService {
         CharacterEntity characterFromDB = this.characterRepository.findById(id).orElseThrow(
                 ()-> new EntityNotFoundException( ErrorEnum.ID_CHARACTER_NOT_FOUND.getMessage()));
         characterMapper.characterEntityRefreshValues(characterFromDB, dto);
-        CharacterEntity characterEdited = characterRepository.save(characterFromDB);
-        return characterMapper.characterEntity2DTO(characterEdited, true);
+        return characterMapper.characterEntity2DTO(characterRepository.save(characterFromDB), true);
     }
 
     @Override
@@ -59,10 +57,9 @@ public class CharacterServiceImpl implements CharacterService {
         return characterMapper.characterEntity2DTO(characterFromDB, true);
     }
 
-    public List<CharacterBasicDTO> getByFilters(String name, String age, List<Long> movies, String order) {
-        CharacterFiltersDTO filtersDTO = new CharacterFiltersDTO(name, age, movies, order);
-        List<CharacterEntity> entities = characterRepository.findAll(this.characterSpecification.getByFilters(filtersDTO));
-        return this.characterMapper.characterEntitySet2DTOFiltersList(entities);
+    public List<CharacterBasicDTO> getByFilters(String name, String age, Double weight, List<Long> movies, String order) {
+        CharacterFiltersDTO filtersDTO = new CharacterFiltersDTO(name, age, weight, movies, order);
+        return this.characterMapper.characterEntitySet2DTOFiltersList(characterRepository.findAll(this.characterSpecification.getByFilters(filtersDTO)));
     }
 
 }

@@ -39,6 +39,15 @@ public class CharacterSpecification {
                 );
             }
 
+            if(StringUtils.hasLength(filtersDTO.getAge())) {
+                predicates.add(
+                        criteriaBuilder.like(
+                                criteriaBuilder.lower(root.get("age")),
+                                "%" + filtersDTO.getName().toLowerCase() + "%"
+                        )
+                );
+            }
+
             if(!CollectionUtils.isEmpty(filtersDTO.getMovies())) {
                 Join<MovieEntity, CharacterEntity> join = root.join("movies", JoinType.INNER);
                 Expression<String> moviesId = join.get("id");
