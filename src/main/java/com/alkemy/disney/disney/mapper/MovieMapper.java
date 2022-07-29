@@ -5,7 +5,6 @@ import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.entity.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Lazy;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDate;
@@ -34,7 +33,7 @@ public class MovieMapper {
         dto.setCreationDate(entity.getCreationDate().toString());
         dto.setQualification(entity.getQualification());
         if(loadCharacters) {
-            Set<CharacterDTO> charactersDTO = this.characterMapper.characterEntitySet2DTOSet(entity.getCharacters(),true);
+            Set<CharacterDTO> charactersDTO = this.characterMapper.characterEntitySet2DTOSet(entity.getCharacters(),false);
             dto.setCharacters(charactersDTO);
         }
         dto.setGenre(entity.getGenre());

@@ -35,10 +35,7 @@ public class EmailServiceImpl implements EmailService {
 
         Email fromEmail = new Email(emailSender);
         Email toEmail = new Email(to);
-        Content content = new Content(
-            "text/plain",
-                "Welcome to Alkemy Disney"
-        );
+        Content content = new Content("text/plain","Welcome to Alkemy Disney");
         String subject = "Alkemy Disney";
 
         Mail mail= new Mail(fromEmail, subject, toEmail, content);

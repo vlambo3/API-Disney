@@ -20,14 +20,12 @@ public class CharacterController {
 
     @PostMapping
     public ResponseEntity<CharacterDTO> save(@Valid @RequestBody CharacterDTO character) {
-        CharacterDTO characterSaved = characterService.save(character);
-        return ResponseEntity.status(HttpStatus.CREATED).body(characterSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(characterService.save(character));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<CharacterDTO> editCharacter(@PathVariable Long id, @RequestBody CharacterDTO dto) {
-        CharacterDTO result = characterService.editCharacter(id, dto);
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok().body(characterService.editCharacter(id, dto));
     }
 
     @DeleteMapping("/{id}")
@@ -38,8 +36,7 @@ public class CharacterController {
 
     @GetMapping
     public ResponseEntity<CharacterDTO> getDetailsById(@PathVariable Long id) {
-        CharacterDTO character = characterService.getDetailsById(id);
-        return ResponseEntity.ok(character);
+        return ResponseEntity.ok(characterService.getDetailsById(id));
     }
 
     @GetMapping("/{id}")
@@ -49,7 +46,6 @@ public class CharacterController {
             @RequestParam(required = false) Double weight,
             @RequestParam(required = false) List<Long> movies,
             @RequestParam(required = false, defaultValue = "ASC") String order) {
-        List<CharacterBasicDTO> characters = characterService.getByFilters(name, age, weight, movies, order);
-        return ResponseEntity.ok(characters);
+        return ResponseEntity.ok(characterService.getByFilters(name, age, weight, movies, order));
     }
 }

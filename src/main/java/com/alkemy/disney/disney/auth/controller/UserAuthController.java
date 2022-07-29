@@ -37,15 +37,17 @@ public class UserAuthController {
         this.jwtTokenUtil = jwtTokenUtil;
     }
 
-    @PostMapping("/singup")
-    public ResponseEntity<AuthenticationResponse> singUp(@Valid @RequestBody UserDTO user) throws Exception {
+    @PostMapping("/register")
+    public ResponseEntity<AuthenticationResponse> register(@Valid @RequestBody UserDTO user) throws Exception {
         this.userDetailsService.save(user);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @PostMapping("singin")
-    public ResponseEntity<AuthenticationResponse> singIn(@RequestBody AuthenticationRequest authRequest) throws Exception {
+    @PostMapping("/login")
+    public ResponseEntity<AuthenticationResponse> login(@RequestBody AuthenticationRequest authRequest) throws Exception {
+
         UserDetails userDetails;
+
         try {
             Authentication auth = authenticationManager.authenticate(
                     new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
@@ -54,7 +56,9 @@ public class UserAuthController {
         } catch (BadCredentialsException e) {
             throw new Exception("Incorrect username or password", e);
         }
+
         final String jwt = jwtTokenUtil.generateToken(userDetails);
+
         return ResponseEntity.ok(new AuthenticationResponse(jwt));
     }
 }

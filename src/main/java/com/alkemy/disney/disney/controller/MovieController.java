@@ -20,14 +20,12 @@ public class MovieController {
 
     @PostMapping
     public ResponseEntity<MovieDTO> save(@Valid @RequestBody MovieDTO movie) {
-        MovieDTO movieSaved = movieService.save(movie);
-        return ResponseEntity.status(HttpStatus.CREATED).body(movieSaved);
+        return ResponseEntity.status(HttpStatus.CREATED).body(movieService.save(movie));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<MovieDTO> editMovie(@PathVariable Long id, @RequestBody MovieDTO dto) {
-        MovieDTO result = movieService.editMovie(id, dto);
-        return ResponseEntity.ok().body(result);
+        return ResponseEntity.ok().body(movieService.editMovie(id, dto));
     }
 
     @DeleteMapping("/{id}")
@@ -50,17 +48,15 @@ public class MovieController {
 
     @GetMapping
     public ResponseEntity<MovieDTO> getDetailsById(@PathVariable Long id) {
-        MovieDTO movie = movieService.getDetailsById(id);
-        return ResponseEntity.ok(movie);
+        return ResponseEntity.ok(movieService.getDetailsById(id));
     }
 
     @GetMapping("/{id}")
     public ResponseEntity<List<MovieBasicDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) Long idGenre,
+            @RequestParam(required = false) Long idGenre, //id o genre?
             @RequestParam(required = false, defaultValue = "ASC") String order) {
-        List<MovieBasicDTO> movies = this.movieService.getByFilters(name, idGenre, order);
-        return ResponseEntity.ok(movies);
+        return ResponseEntity.ok(this.movieService.getByFilters(name, idGenre, order));
     }
 
 }

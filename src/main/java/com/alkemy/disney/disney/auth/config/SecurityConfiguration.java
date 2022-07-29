@@ -22,13 +22,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Autowired
     private JwtRequestFilter jwtRequestFilter;
 
-    @Override //sobreescribimos el método que viene por defecto
-     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-        auth.
-                userDetailsService(userDetailsCustomService);
+    @Override
+    protected void configure(AuthenticationManagerBuilder auth) throws Exception {
+        auth.userDetailsService(userDetailsCustomService);
     }
 
-    @Bean //para poder encodear la password, pero le vamos a decir que no use encoder
+    @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
@@ -43,6 +42,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity httpSecurity) throws Exception {
         httpSecurity.csrf().disable()
+                //.authorizeRequests().antMatchers("/characters/*","/genres/*", "/movies/*").permitAll()
                 .authorizeRequests().antMatchers("/auth/*").permitAll()
                 .anyRequest().authenticated()
                 .and().exceptionHandling()
