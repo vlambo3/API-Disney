@@ -20,6 +20,5 @@ public class GenreMapper {
         dto.setName(entity.getName());
         dto.setImage(entity.getImage());
         return dto;
-
     }
 }

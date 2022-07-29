@@ -47,6 +47,10 @@ public class CharacterServiceImpl implements CharacterService {
         characterRepository.deleteById(id);
     }
 
+    public List<CharacterDTO> getAllCharacters() {
+        return characterMapper.characterEntityList2DTOList(characterRepository.findAll());
+    }
+
     public CharacterEntity getEntityById(Long id) {
         return characterRepository.getById(id);
     }

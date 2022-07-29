@@ -3,6 +3,7 @@ package com.alkemy.disney.disney.mapper;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
+import com.alkemy.disney.disney.entity.CharacterEntity;
 import com.alkemy.disney.disney.entity.MovieEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -22,7 +23,7 @@ public class MovieMapper {
     public MovieEntity movieDTO2Entity(MovieDTO dto) {
         MovieEntity entity = new MovieEntity();
         convertBasicValues(entity,dto);
-        return  entity;
+        return entity;
     }
 
     public MovieDTO movieEntity2DTO(MovieEntity entity, boolean loadCharacters) {
@@ -80,6 +81,7 @@ public class MovieMapper {
                 this.string2LocalDate(dto.getCreationDate().toString()));
         entity.setQualification(dto.getQualification());
         entity.setGenreId(dto.getGenreId());
+        entity.setCharacters(characterMapper.characterDTOList2EntityList(dto.getCharacters()));
     }
 
 }

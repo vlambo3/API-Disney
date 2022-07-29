@@ -9,6 +9,7 @@ public interface MovieService {
     MovieDTO save(MovieDTO dto);
     MovieDTO editMovie(Long id, MovieDTO dto);
     void delete(Long id);
+    List<MovieDTO> getAllMovies();
     void addCharacter(Long id, Long idCharacter);
     void removeCharacter(Long id, Long idCharacter);
     /*

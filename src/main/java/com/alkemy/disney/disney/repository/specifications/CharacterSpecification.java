@@ -30,21 +30,15 @@ public class CharacterSpecification {
                 );
             }
 
-            if(StringUtils.hasLength(filtersDTO.getAge())) {
+            if (filtersDTO.getAge() != null) {
                 predicates.add(
-                        criteriaBuilder.like(
-                                criteriaBuilder.lower(root.get("age")),
-                                "%" + filtersDTO.getName().toLowerCase() + "%"
-                        )
+                        criteriaBuilder.equal(root.get("age"), filtersDTO.getAge())
                 );
             }
 
-            if(StringUtils.hasLength(filtersDTO.getAge())) {
+            if (filtersDTO.getWeight() != null) {
                 predicates.add(
-                        criteriaBuilder.like(
-                                criteriaBuilder.lower(root.get("age")),
-                                "%" + filtersDTO.getName().toLowerCase() + "%"
-                        )
+                        criteriaBuilder.equal(root.get("weight"), filtersDTO.getWeight())
                 );
             }
 

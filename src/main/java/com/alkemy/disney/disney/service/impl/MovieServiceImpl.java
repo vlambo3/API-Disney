@@ -2,6 +2,7 @@ package com.alkemy.disney.disney.service.impl;
 
 import com.alkemy.disney.disney.controller.RestExceptionHandler;
 import com.alkemy.disney.disney.dto.*;
+import com.alkemy.disney.disney.entity.CharacterEntity;
 import com.alkemy.disney.disney.entity.MovieEntity;
 import com.alkemy.disney.disney.enumuration.ErrorEnum;
 import com.alkemy.disney.disney.mapper.MovieMapper;
@@ -37,41 +38,42 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private RestExceptionHandler restExceptionHandler;
 
-    public MovieServiceImpl() {
-    }
-
     public MovieDTO save(MovieDTO dto) {
-        MovieEntity entitySaved = movieRepository.save(movieMapper.movieDTO2Entity(dto));
-        return movieMapper.movieEntity2DTO(entitySaved, true);
+        return movieMapper.movieEntity2DTO(movieRepository.save(movieMapper.movieDTO2Entity(dto)), true);
     }
 
     public MovieDTO editMovie(Long id, MovieDTO dto) {
         MovieEntity movieFromDB = this.movieRepository.findById(id).orElseThrow(
                 ()-> new EntityNotFoundException( ErrorEnum.ID_MOVIE_NOT_FOUND.getMessage()));
         movieMapper.movieEntityRefreshValues(movieFromDB, dto);
-        return movieMapper.movieEntity2DTO(movieRepository.save(movieFromDB), true);
+        return movieMapper.movieEntity2DTO(movieRepository.save(movieFromDB), false);
     }
 
     public void delete(Long id) {
         movieRepository.deleteById(id);
     }
 
+    public List<MovieDTO> getAllMovies() {
+        List<MovieEntity> movies = movieRepository.findAll();
+        return movieMapper.movieEntityList2DTOList(movies, true);
+    }
+
     public void addCharacter(Long id, Long idCharacter) {
-        MovieEntity movieFromDB = this.movieRepository.findById(id).orElseThrow(
+        MovieEntity movieFromDB = movieRepository.findById(id).orElseThrow(
                 ()-> new EntityNotFoundException( ErrorEnum.ID_MOVIE_NOT_FOUND.getMessage()));
+        CharacterEntity characterFromDB = characterRepository.findById(idCharacter).orElseThrow(
+                ()-> new EntityNotFoundException( ErrorEnum.ID_CHARACTER_NOT_FOUND.getMessage()));
         movieFromDB.addCharacter(characterService.getEntityById(idCharacter));
         movieRepository.save(movieFromDB);
     }
 
     public void removeCharacter(Long id, Long idCharacter) {
-        MovieEntity movieFromDB = this.movieRepository.findById(id).orElseThrow(
+        MovieEntity movieFromDB = movieRepository.findById(id).orElseThrow(
                 ()-> new EntityNotFoundException( ErrorEnum.ID_MOVIE_NOT_FOUND.getMessage()));
+        CharacterEntity characterFromDB = characterRepository.findById(idCharacter).orElseThrow(
+                ()-> new EntityNotFoundException( ErrorEnum.ID_CHARACTER_NOT_FOUND.getMessage()));
         movieFromDB.removeCharacter(characterService.getEntityById(idCharacter));
         movieRepository.save(movieFromDB);
-    }
-
-    public MovieEntity getEntityById(Long id) {
-        return movieRepository.getById(id);
     }
 
     public MovieDTO getDetailsById(Long id) {
@@ -80,8 +82,8 @@ public class MovieServiceImpl implements MovieService {
         return movieMapper.movieEntity2DTO(movieFromDB, true);
     }
 
-    public List<MovieBasicDTO> getByFilters(String name, Long idGenre, String order) {
-        MovieFiltersDTO filtersDTO = new MovieFiltersDTO(name, idGenre, order);
+    public List<MovieBasicDTO> getByFilters(String title, Long idGenre, String order) {
+        MovieFiltersDTO filtersDTO = new MovieFiltersDTO(title, idGenre, order);
         List<MovieEntity> entities = movieRepository.findAll(movieSpecification.getByFilters(filtersDTO));
         return this.movieMapper.movieEntityList2DTOFiltersList(entities);
     }

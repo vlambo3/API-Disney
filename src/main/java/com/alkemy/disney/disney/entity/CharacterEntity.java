@@ -11,7 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "characters")
 @Data
-@SQLDelete(sql = "UPDATE character SET deleted = true WHERE id=?")
+@SQLDelete(sql = "UPDATE characters SET deleted = true WHERE id=?")
 @Where(clause = "deleted=false")
 public class CharacterEntity {
     @Id
@@ -46,16 +46,5 @@ public class CharacterEntity {
             }
         }
     }
-
-    /*
-    public void addMovie(MovieEntity movie) {
-        this.movies.add(movie);
-        //movie.getCharacters().add(this);
-    }
-
-    public void removeMovie(MovieEntity movie) {
-        this.movies.remove(movie);
-        //movie.getCharacters().remove(this);
-    }*/
 
 }

@@ -34,24 +34,30 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @PostMapping("/{id}/character/{idCharacter}")
-    public ResponseEntity<Void> addCharacter(@PathVariable Long idMovie, @PathVariable Long idCharacter) {
-        movieService.addCharacter(idMovie, idCharacter);
+    @GetMapping
+    public ResponseEntity<List<MovieDTO>> getAllMovies() {
+        List<MovieDTO> movies = movieService.getAllMovies();
+        return ResponseEntity.ok(movies);
+    }
+
+    @PostMapping("/{id}/characters/{idCharacter}")
+    public ResponseEntity<Void> addCharacter(@PathVariable Long id, @PathVariable Long idCharacter) {
+        movieService.addCharacter(id, idCharacter);
         return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
-    @DeleteMapping("/{id}/character/{idCharacter}")
-    public ResponseEntity<Void> removeCharacter(@PathVariable Long idMovie, @PathVariable Long idCharacter) {
-        movieService.removeCharacter(idMovie, idCharacter);
+    @DeleteMapping("/{id}/characters/{idCharacter}")
+    public ResponseEntity<Void> removeCharacter(@PathVariable Long id, @PathVariable Long idCharacter) {
+        movieService.removeCharacter(id, idCharacter);
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping
+    @GetMapping("/{id}")
     public ResponseEntity<MovieDTO> getDetailsById(@PathVariable Long id) {
         return ResponseEntity.ok(movieService.getDetailsById(id));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/filters")
     public ResponseEntity<List<MovieBasicDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) Long idGenre, //id o genre?

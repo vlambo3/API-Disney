@@ -35,11 +35,16 @@ public class CharacterController {
     }
 
     @GetMapping
+    public ResponseEntity<List<CharacterDTO>> getAllCharacters() {
+        return ResponseEntity.ok(characterService.getAllCharacters());
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity<CharacterDTO> getDetailsById(@PathVariable Long id) {
         return ResponseEntity.ok(characterService.getDetailsById(id));
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/filters")
     public ResponseEntity<List<CharacterBasicDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String age,

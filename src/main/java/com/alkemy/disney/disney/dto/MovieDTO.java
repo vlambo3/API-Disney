@@ -18,7 +18,6 @@ public class MovieDTO {
     private String image;
     @NotNull
     private String title;
-    @Pattern(regexp = "\\d{4}", message = "The format should be yyyy")
     private String creationDate;
     @Min(1)
     @Max(5)

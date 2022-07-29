@@ -36,6 +36,21 @@ public class CharacterMapper {
         return dto;
     }
 
+    public Set<CharacterEntity> characterDTOList2EntityList(Set<CharacterDTO> dtos) {
+        Set<CharacterEntity> entities = new HashSet<>();
+        for (CharacterDTO dto : dtos) {
+            entities.add(this.characterDTO2CharacterEntity(dto));
+        }
+        return entities;
+    }
+    public List<CharacterDTO> characterEntityList2DTOList(List<CharacterEntity> entities) {
+        List<CharacterDTO> dtos = new ArrayList<>();
+        for (CharacterEntity entity : entities) {
+            dtos.add(this.characterEntity2DTO(entity, true));
+        }
+        return dtos;
+    }
+
     public CharacterBasicDTO characterEntity2DTOFilters(CharacterEntity entity) {
         CharacterBasicDTO dto = new CharacterBasicDTO();
         dto.setName(entity.getName());

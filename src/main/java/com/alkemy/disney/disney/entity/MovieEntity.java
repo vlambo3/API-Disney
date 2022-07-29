@@ -1,6 +1,8 @@
 package com.alkemy.disney.disney.entity;
 
 import lombok.Data;
+import org.hibernate.annotations.SQLDelete;
+import org.hibernate.annotations.Where;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.*;
@@ -12,6 +14,8 @@ import java.util.Set;
 @Entity
 @Table(name = "movies")
 @Data
+@SQLDelete(sql = "UPDATE movies SET deleted = true WHERE id=?")
+@Where(clause = "deleted=false")
 public class MovieEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
@@ -21,7 +25,7 @@ public class MovieEntity {
     private String title;
 
     @Column(name = "creation_date")
-    @DateTimeFormat(pattern = "yyyy")
+    @DateTimeFormat(pattern = "yyyy-MM")
     private LocalDate creationDate;
     private Double qualification;
 
@@ -41,13 +45,13 @@ public class MovieEntity {
     @Column(name = "genre_id", nullable = false)
     private Long genreId;
 
+    private boolean deleted = Boolean.FALSE;
+
     public void addCharacter(CharacterEntity character) {
-        this.characters.add(character);
-        character.getMovies().add(this);
+        characters.add(character);
     }
 
     public void removeCharacter(CharacterEntity character) {
-        this.characters.remove(character);
-        character.getMovies().remove(this);
+        characters.remove(character);
     }
 }
