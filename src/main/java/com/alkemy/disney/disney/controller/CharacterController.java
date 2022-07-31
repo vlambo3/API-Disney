@@ -34,23 +34,16 @@ public class CharacterController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping
-    public ResponseEntity<List<CharacterDTO>> getAllCharacters() {
-        return ResponseEntity.ok(characterService.getAllCharacters());
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<CharacterDTO> getDetailsById(@PathVariable Long id) {
         return ResponseEntity.ok(characterService.getDetailsById(id));
     }
 
-    @GetMapping("/filters")
+    @GetMapping
     public ResponseEntity<List<CharacterBasicDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
             @RequestParam(required = false) String age,
-            @RequestParam(required = false) Double weight,
-            @RequestParam(required = false) List<Long> movies,
-            @RequestParam(required = false, defaultValue = "ASC") String order) {
-        return ResponseEntity.ok(characterService.getByFilters(name, age, weight, movies, order));
+            @RequestParam(required = false) List<Long> movies) {
+        return ResponseEntity.ok(characterService.getByFilters(name, age, movies));
     }
 }

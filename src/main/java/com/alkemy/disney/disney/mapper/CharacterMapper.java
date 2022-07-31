@@ -2,6 +2,7 @@ package com.alkemy.disney.disney.mapper;
 
 import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
+import com.alkemy.disney.disney.dto.CharacterFiltersDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
 import com.alkemy.disney.disney.entity.CharacterEntity;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -51,20 +52,36 @@ public class CharacterMapper {
         return dtos;
     }
 
-    public CharacterBasicDTO characterEntity2DTOFilters(CharacterEntity entity) {
-        CharacterBasicDTO dto = new CharacterBasicDTO();
-        dto.setName(entity.getName());
-        dto.setImage(entity.getImage());
-        return dto;
-    }
-
-    public List<CharacterBasicDTO> characterEntitySet2DTOFiltersList(Collection<CharacterEntity> entities)  {
+    public List<CharacterBasicDTO> characterEntityList2DTOBasicList(List<CharacterEntity> entities) {
         List<CharacterBasicDTO> dtos = new ArrayList<>();
-        for (CharacterEntity entity: entities)  {
-            dtos.add(this.characterEntity2DTOFilters(entity));
+        for (CharacterEntity entity : entities) {
+            dtos.add(this.characterEntity2DTOBasic(entity));
         }
         return dtos;
     }
+
+    public CharacterBasicDTO characterEntity2DTOBasic(CharacterEntity entity) {
+        CharacterBasicDTO dtoBasic = new CharacterBasicDTO();
+        dtoBasic.setImage(entity.getImage());
+        dtoBasic.setName(entity.getName());
+        return dtoBasic;
+    }
+    /*
+    public CharacterBasicDTO characterEntity2DTOFilters(CharacterFiltersDTO entitiesFilter) {
+        CharacterBasicDTO dto = new CharacterBasicDTO();
+        dto.setName(entitiesFilter.getName());
+        dto.setImage(entitiesFilter.getImage());
+        return dto;
+    }
+
+    public List<CharacterBasicDTO> characterFilterSet2DTOBasicList(Collection<CharacterFiltersDTO> filtersDTOS)  {
+        List<CharacterBasicDTO> dtos = new ArrayList<>();
+        for (CharacterEntity entity: filtersDTOS)  {
+            dtos.add(this.characterEntity2DTOFilters(entity));
+        }
+        return dtos;
+    }*/
+
     public Set<CharacterDTO> characterEntitySet2DTOSet(Collection<CharacterEntity> entities, boolean loadMovies)  {
         Set<CharacterDTO> dtos = new HashSet<>();
         for (CharacterEntity entity: entities)  {

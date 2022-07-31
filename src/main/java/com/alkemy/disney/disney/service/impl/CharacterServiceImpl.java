@@ -25,7 +25,7 @@ public class CharacterServiceImpl implements CharacterService {
     private CharacterRepository characterRepository;
     @Autowired
     private MovieService movieService;
-
+    @Autowired
     private CharacterSpecification characterSpecification;
 
 
@@ -61,9 +61,15 @@ public class CharacterServiceImpl implements CharacterService {
         return characterMapper.characterEntity2DTO(characterFromDB, true);
     }
 
-    public List<CharacterBasicDTO> getByFilters(String name, String age, Double weight, List<Long> movies, String order) {
-        CharacterFiltersDTO filtersDTO = new CharacterFiltersDTO(name, age, weight, movies, order);
-        return this.characterMapper.characterEntitySet2DTOFiltersList(characterRepository.findAll(this.characterSpecification.getByFilters(filtersDTO)));
+    public List<CharacterBasicDTO> getByFilters(String name, String age, List<Long> movies) {
+        CharacterFiltersDTO filtersDTO = new CharacterFiltersDTO(name, age, movies);
+        List<CharacterEntity> entities = characterRepository.findAll(characterSpecification.getByFilters(filtersDTO));
+        List<CharacterBasicDTO> dtos = characterMapper.characterEntityList2DTOBasicList(entities);
+        if(dtos.isEmpty()) {
+            return characterMapper.characterEntityList2DTOBasicList(characterRepository.findAll());
+        } else {
+            return dtos;
+        }
     }
 
 }

@@ -36,12 +36,6 @@ public class CharacterSpecification {
                 );
             }
 
-            if (filtersDTO.getWeight() != null) {
-                predicates.add(
-                        criteriaBuilder.equal(root.get("weight"), filtersDTO.getWeight())
-                );
-            }
-
             if(!CollectionUtils.isEmpty(filtersDTO.getMovies())) {
                 Join<MovieEntity, CharacterEntity> join = root.join("movies", JoinType.INNER);
                 Expression<String> moviesId = join.get("id");
@@ -51,20 +45,6 @@ public class CharacterSpecification {
             //remove duplicates
             query.distinct(true);
 
-            //Order resolver
-            String orderByFieldNames = "name";
-            query.orderBy(
-                    filtersDTO.isASC() ?
-                            criteriaBuilder.asc(root.get(orderByFieldNames)):
-                            criteriaBuilder.desc(root.get(orderByFieldNames))
-            );
-
-            String orderByFieldMovies = "movies";
-            query.orderBy(
-                    filtersDTO.isASC() ?
-                            criteriaBuilder.asc(root.get(orderByFieldMovies)):
-                            criteriaBuilder.desc(root.get(orderByFieldMovies))
-            );
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
 
