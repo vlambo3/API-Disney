@@ -35,9 +35,6 @@ public class MovieServiceImpl implements MovieService {
     @Autowired
     private CharacterRepository characterRepository;
 
-    @Autowired
-    private RestExceptionHandler restExceptionHandler;
-
     public MovieDTO save(MovieDTO dto) {
         return movieMapper.movieEntity2DTO(movieRepository.save(movieMapper.movieDTO2Entity(dto)), true);
     }
@@ -55,7 +52,7 @@ public class MovieServiceImpl implements MovieService {
 
     public List<MovieDTO> getAllMovies() {
         List<MovieEntity> movies = movieRepository.findAll();
-        return movieMapper.movieEntityList2DTOList(movies, true);
+        return movieMapper.movieEntityList2DTOList(movies);
     }
 
     public void addCharacter(Long id, Long idCharacter) {
@@ -84,8 +81,11 @@ public class MovieServiceImpl implements MovieService {
 
     public List<MovieBasicDTO> getByFilters(String title, Long idGenre, String order) {
         MovieFiltersDTO filtersDTO = new MovieFiltersDTO(title, idGenre, order);
-        List<MovieEntity> entities = movieRepository.findAll(movieSpecification.getByFilters(filtersDTO));
-        return this.movieMapper.movieEntityList2DTOFiltersList(entities);
+        if(movieMapper.movieEntityList2DTOBasicList(movieRepository.findAll(movieSpecification.getByFilters(filtersDTO))).isEmpty()) {
+            return movieMapper.movieEntityList2DTOBasicList(movieRepository.findAll());
+        } else {
+            return movieMapper.movieEntityList2DTOBasicList(movieRepository.findAll(movieSpecification.getByFilters(filtersDTO)));
+        }
     }
 
 }

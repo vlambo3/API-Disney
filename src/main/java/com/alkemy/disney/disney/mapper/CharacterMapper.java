@@ -31,7 +31,7 @@ public class CharacterMapper {
         dto.setWeight(entity.getWeight());
         dto.setHistory(entity.getHistory());
         if(loadMovies) {
-            List<MovieDTO> moviesDTO = this.movieMapper.movieEntityList2DTOList(entity.getMovies(), false);
+            List<MovieDTO> moviesDTO = this.movieMapper.movieEntityList2DTOList(entity.getMovies());
             dto.setMovies(moviesDTO);
         }
         return dto;
@@ -66,21 +66,6 @@ public class CharacterMapper {
         dtoBasic.setName(entity.getName());
         return dtoBasic;
     }
-    /*
-    public CharacterBasicDTO characterEntity2DTOFilters(CharacterFiltersDTO entitiesFilter) {
-        CharacterBasicDTO dto = new CharacterBasicDTO();
-        dto.setName(entitiesFilter.getName());
-        dto.setImage(entitiesFilter.getImage());
-        return dto;
-    }
-
-    public List<CharacterBasicDTO> characterFilterSet2DTOBasicList(Collection<CharacterFiltersDTO> filtersDTOS)  {
-        List<CharacterBasicDTO> dtos = new ArrayList<>();
-        for (CharacterEntity entity: filtersDTOS)  {
-            dtos.add(this.characterEntity2DTOFilters(entity));
-        }
-        return dtos;
-    }*/
 
     public Set<CharacterDTO> characterEntitySet2DTOSet(Collection<CharacterEntity> entities, boolean loadMovies)  {
         Set<CharacterDTO> dtos = new HashSet<>();

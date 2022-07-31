@@ -11,7 +11,6 @@ public interface CharacterService {
     CharacterDTO save(CharacterDTO dto);
     CharacterDTO editCharacter(Long id, CharacterDTO dto);
     void delete(Long id);
-    List<CharacterDTO> getAllCharacters();
     CharacterEntity getEntityById(Long id);
     CharacterDTO getDetailsById(Long id);
     List<CharacterBasicDTO> getByFilters(String name, String age, List<Long> movies);

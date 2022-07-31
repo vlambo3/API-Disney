@@ -1,11 +1,7 @@
 package com.alkemy.disney.disney.repository.specifications;
 
-import com.alkemy.disney.disney.dto.CharacterFiltersDTO;
 import com.alkemy.disney.disney.dto.MovieFiltersDTO;
-import com.alkemy.disney.disney.entity.CharacterEntity;
 import com.alkemy.disney.disney.entity.MovieEntity;
-import com.alkemy.disney.disney.repository.GenreRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -17,8 +13,6 @@ import java.util.List;
 @Component
 public class MovieSpecification {
 
-    @Autowired
-    private GenreRepository genreRepository;
     public Specification<MovieEntity> getByFilters(MovieFiltersDTO filtersDTO) {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
@@ -32,15 +26,11 @@ public class MovieSpecification {
                 );
             }
 
-            if(StringUtils.hasLength(filtersDTO.getGenreId().toString())) {
-
+            if(filtersDTO.getGenreId() != null) {
                 predicates.add(
-                                criteriaBuilder.equal(root.get("genre"), filtersDTO.getGenreId())
+                                criteriaBuilder.equal(root.get("id"), filtersDTO.getGenreId())
                 );
             }
-
-            //remove duplicates
-            query.distinct(true);
 
             //Order resolver
             String orderByFieldNames = "creationDate";

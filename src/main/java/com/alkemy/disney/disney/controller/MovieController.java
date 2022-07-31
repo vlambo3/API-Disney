@@ -34,12 +34,6 @@ public class MovieController {
         return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
     }
 
-    @GetMapping
-    public ResponseEntity<List<MovieDTO>> getAllMovies() {
-        List<MovieDTO> movies = movieService.getAllMovies();
-        return ResponseEntity.ok(movies);
-    }
-
     @PostMapping("/{id}/characters/{idCharacter}")
     public ResponseEntity<Void> addCharacter(@PathVariable Long id, @PathVariable Long idCharacter) {
         movieService.addCharacter(id, idCharacter);
@@ -57,10 +51,10 @@ public class MovieController {
         return ResponseEntity.ok(movieService.getDetailsById(id));
     }
 
-    @GetMapping("/filters")
+    @GetMapping
     public ResponseEntity<List<MovieBasicDTO>> getDetailsByFilters(
             @RequestParam(required = false) String name,
-            @RequestParam(required = false) Long idGenre, //id o genre?
+            @RequestParam(required = false) Long idGenre,
             @RequestParam(required = false, defaultValue = "ASC") String order) {
         return ResponseEntity.ok(this.movieService.getByFilters(name, idGenre, order));
     }

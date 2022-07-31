@@ -28,7 +28,6 @@ public class CharacterServiceImpl implements CharacterService {
     @Autowired
     private CharacterSpecification characterSpecification;
 
-
     public CharacterDTO save(CharacterDTO dto) {
         CharacterEntity entitySaved = characterRepository.save(characterMapper.characterDTO2CharacterEntity(dto));
         return characterMapper.characterEntity2DTO(entitySaved, true);
@@ -47,9 +46,6 @@ public class CharacterServiceImpl implements CharacterService {
         characterRepository.deleteById(id);
     }
 
-    public List<CharacterDTO> getAllCharacters() {
-        return characterMapper.characterEntityList2DTOList(characterRepository.findAll());
-    }
 
     public CharacterEntity getEntityById(Long id) {
         return characterRepository.getById(id);
@@ -63,12 +59,10 @@ public class CharacterServiceImpl implements CharacterService {
 
     public List<CharacterBasicDTO> getByFilters(String name, String age, List<Long> movies) {
         CharacterFiltersDTO filtersDTO = new CharacterFiltersDTO(name, age, movies);
-        List<CharacterEntity> entities = characterRepository.findAll(characterSpecification.getByFilters(filtersDTO));
-        List<CharacterBasicDTO> dtos = characterMapper.characterEntityList2DTOBasicList(entities);
-        if(dtos.isEmpty()) {
+        if(characterMapper.characterEntityList2DTOBasicList(characterRepository.findAll(characterSpecification.getByFilters(filtersDTO))).isEmpty()) {
             return characterMapper.characterEntityList2DTOBasicList(characterRepository.findAll());
         } else {
-            return dtos;
+            return characterMapper.characterEntityList2DTOBasicList(characterRepository.findAll(characterSpecification.getByFilters(filtersDTO)));
         }
     }
 

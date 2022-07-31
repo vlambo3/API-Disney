@@ -1,5 +1,6 @@
 package com.alkemy.disney.disney.mapper;
 
+import com.alkemy.disney.disney.dto.CharacterBasicDTO;
 import com.alkemy.disney.disney.dto.CharacterDTO;
 import com.alkemy.disney.disney.dto.MovieBasicDTO;
 import com.alkemy.disney.disney.dto.MovieDTO;
@@ -41,13 +42,6 @@ public class MovieMapper {
         return dto;
     }
 
-    public MovieBasicDTO movieEntity2DTOFilters(MovieEntity entity) {
-        MovieBasicDTO dto = new MovieBasicDTO();
-        dto.setImage(entity.getImage());
-        dto.setTitle(entity.getTitle());
-        return dto;
-    }
-
     public void movieEntityRefreshValues(MovieEntity entity, MovieDTO dto) {
         convertBasicValues(entity,dto);
     }
@@ -58,20 +52,28 @@ public class MovieMapper {
         return date;
     }
 
-    public List<MovieDTO> movieEntityList2DTOList(List<MovieEntity> entities, boolean loadCharacters) {
+    public List<MovieDTO> movieEntityList2DTOList(List<MovieEntity> entities) {
         List<MovieDTO> dtos = new ArrayList<>();
-        for (MovieEntity entity: entities) {
-            dtos.add(this.movieEntity2DTO(entity, loadCharacters));
+        for (MovieEntity entity : entities) {
+            dtos.add(this.movieEntity2DTO(entity, true));
         }
         return dtos;
     }
 
-    public List<MovieBasicDTO> movieEntityList2DTOFiltersList(List<MovieEntity> entities) {
+    public List<MovieBasicDTO> movieEntityList2DTOBasicList(List<MovieEntity> entities) {
         List<MovieBasicDTO> dtos = new ArrayList<>();
-        for (MovieEntity entity: entities) {
-            dtos.add(this.movieEntity2DTOFilters(entity));
+        for (MovieEntity entity : entities) {
+            dtos.add(this.movieEntity2DTOBasic(entity));
         }
         return dtos;
+    }
+
+    public MovieBasicDTO movieEntity2DTOBasic(MovieEntity entity) {
+        MovieBasicDTO dtoBasic = new MovieBasicDTO();
+        dtoBasic.setImage(entity.getImage());
+        dtoBasic.setTitle(entity.getTitle());
+        dtoBasic.setCreationDate(entity.getCreationDate());
+        return dtoBasic;
     }
 
     public void convertBasicValues(MovieEntity entity, MovieDTO dto) {
