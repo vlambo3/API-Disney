@@ -1,0 +1,516 @@
+{
+	"info": {
+		"_postman_id": "13608d22-6642-4d38-a7f9-cb73e7379123",
+		"name": "Alkemy Disney",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Genres",
+			"item": [
+				{
+					"name": "genres",
+					"_postman_id": "b22f49e7-8bfd-4328-9191-3c10b7bc1232",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTUzODQ4LCJpYXQiOjE2NTkxMTc4NDh9.LN7BXvlwxwedqh2IacbQMAZhvwFO4HrPPOS5lp3ny-8",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{    \r\n    \"name\": \"Familiar\",\r\n    \"image\": \"familiar.jpg\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:8080/genres?Authorization=Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MDgxMTYzLCJpYXQiOjE2NTkwNDUxNjN9.g8IUe2HSA8G-5rps2Q9B-Z3C2qoo6d77yJMrbfBvtzw",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"genres"
+							],
+							"query": [
+								{
+									"key": "Authorization",
+									"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MDgxMTYzLCJpYXQiOjE2NTkwNDUxNjN9.g8IUe2HSA8G-5rps2Q9B-Z3C2qoo6d77yJMrbfBvtzw"
+								}
+							]
+						}
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "ffe98803-beb5-4206-8937-d2744ca350cc"
+		},
+		{
+			"name": "Movies",
+			"item": [
+				{
+					"name": "movies",
+					"_postman_id": "c980ef6e-a55e-4350-a61b-55f5becad382",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU3Nzg5LCJpYXQiOjE2NTkxMjE3ODl9.VeXCLITOYKiUERoquo4n32WKOyMJ5NC6FAfCEF2d8PQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creationDate\": \"2001-03-19\", \r\n    \"genreId\": 1, \r\n    \"image\": \"madagascar.jpg\", \r\n    \"qualification\": \"5\",  \r\n    \"title\": \"Madagascar\",\r\n    \"characters\": [\r\n        {        \r\n            \"age\": \"18\",\r\n            \"history\": \"Leon en zoo en NY\",\r\n            \"image\": \"alexLeon.jpg\",\r\n            \"name\": \"Alex\",\r\n            \"weight\": \"180\"\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/movies"
+					},
+					"response": []
+				},
+				{
+					"name": "movies/{id}",
+					"_postman_id": "acb112b3-44f6-4215-8945-1e6ac473903f",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU3Nzg5LCJpYXQiOjE2NTkxMjE3ODl9.VeXCLITOYKiUERoquo4n32WKOyMJ5NC6FAfCEF2d8PQ",
+								"type": "default"
+							}
+						],
+						"url": "http://localhost:8080/movies/19"
+					},
+					"response": []
+				},
+				{
+					"name": "movies",
+					"_postman_id": "fa6409d8-0864-4c61-8467-44a32030176b",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5Mjc1MTgzLCJpYXQiOjE2NTkyMzkxODN9.gZIEeoKgMYSvzFAeyY7H9_-YwD_3DC8TAjYxFoQtJLA",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/movies?name=frozen",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"movies"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "frozen"
+								},
+								{
+									"key": "genre",
+									"value": "1",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "order",
+									"value": "ASC",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "movies/{id}",
+					"_postman_id": "b12a36cf-55fc-4ac3-95f7-3903c7107887",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU3Nzg5LCJpYXQiOjE2NTkxMjE3ODl9.VeXCLITOYKiUERoquo4n32WKOyMJ5NC6FAfCEF2d8PQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creationDate\": \"2001-03-19\", \r\n    \"genreId\": 1, \r\n    \"image\": \"madagascar.jpg\", \r\n    \"qualification\": \"5\",  \r\n    \"title\": \"Buscando a Nemo\",\r\n    \"characters\": [\r\n        {        \r\n            \"age\": \"18\",\r\n            \"history\": \"Leon en zoo en NY\",\r\n            \"image\": \"alexLeon.jpg\",\r\n            \"name\": \"Alex\",\r\n            \"weight\": \"180\"\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/movies/21"
+					},
+					"response": []
+				},
+				{
+					"name": "movies/{id}",
+					"_postman_id": "7a8bee35-de74-4d5e-80ac-578ff611902c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU3Nzg5LCJpYXQiOjE2NTkxMjE3ODl9.VeXCLITOYKiUERoquo4n32WKOyMJ5NC6FAfCEF2d8PQ",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"creationDate\": \"2001-03-19\", \r\n    \"genreId\": 1, \r\n    \"image\": \"madagascar.jpg\", \r\n    \"qualification\": \"5\",  \r\n    \"title\": \"Buscando a Nemo\",\r\n    \"characters\": [\r\n        {        \r\n            \"age\": \"18\",\r\n            \"history\": \"Leon en zoo en NY\",\r\n            \"image\": \"alexLeon.jpg\",\r\n            \"name\": \"Alex\",\r\n            \"weight\": \"180\"\r\n        }\r\n    ]\r\n}\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/movies/21"
+					},
+					"response": []
+				},
+				{
+					"name": "movies/{id}/characters/{idCharacter}",
+					"_postman_id": "33c7ebf4-3bed-45e3-adf6-44f078f4c53c",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU3Nzg5LCJpYXQiOjE2NTkxMjE3ODl9.VeXCLITOYKiUERoquo4n32WKOyMJ5NC6FAfCEF2d8PQ",
+								"type": "default"
+							}
+						],
+						"url": "http://localhost:8080/movies/19/characters/17"
+					},
+					"response": []
+				},
+				{
+					"name": "movies/{id}/characters/{idCharacter}",
+					"_postman_id": "1fa2c0f2-d888-450e-968d-6094fc8680fa",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU3Nzg5LCJpYXQiOjE2NTkxMjE3ODl9.VeXCLITOYKiUERoquo4n32WKOyMJ5NC6FAfCEF2d8PQ",
+								"type": "default"
+							}
+						],
+						"url": "http://localhost:8080/movies/19/characters/17"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "df156d2a-8b6c-4a61-909c-8ac2cd9f938f"
+		},
+		{
+			"name": "auth",
+			"item": [
+				{
+					"name": "register",
+					"_postman_id": "2852858d-de29-4a83-ac5f-789d964988bb",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"prueba@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/auth/register"
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"_postman_id": "41bcfe15-be5f-419c-9fe2-e4128f3c6431",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU0ODc5LCJpYXQiOjE2NTkxMTg4Nzl9.8qPEznLZxM-umLqleDMjrkacjWWvZ_Kw2y04HkP335Q",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"prueba@gmail.com\",\r\n    \"password\": \"password\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/auth/login"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "594036ce-979f-4ad1-b587-5f83c92fd666"
+		},
+		{
+			"name": "Characters",
+			"item": [
+				{
+					"name": "characters",
+					"_postman_id": "f1084b83-9b21-41d8-afb3-833dcc8144a7",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5Mjc1MTgzLCJpYXQiOjE2NTkyMzkxODN9.gZIEeoKgMYSvzFAeyY7H9_-YwD_3DC8TAjYxFoQtJLA",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"age\": \"18\",\r\n    \"history\": \"Aurora de Frozen\",\r\n    \"image\": \"aurora.jpg\",\r\n    \"name\": \"Aurora\",\r\n    \"weight\": \"180\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/characters"
+					},
+					"response": []
+				},
+				{
+					"name": "characters/{id}",
+					"_postman_id": "a2c552ca-787f-4232-9eb2-cb88d4d11924",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU3Nzg5LCJpYXQiOjE2NTkxMjE3ODl9.VeXCLITOYKiUERoquo4n32WKOyMJ5NC6FAfCEF2d8PQ",
+								"type": "default"
+							}
+						],
+						"url": "http://localhost:8080/characters/16"
+					},
+					"response": []
+				},
+				{
+					"name": "characters",
+					"_postman_id": "66a89bfb-0f77-4b5a-a785-c7ace6941587",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5Mjc1MTgzLCJpYXQiOjE2NTkyMzkxODN9.gZIEeoKgMYSvzFAeyY7H9_-YwD_3DC8TAjYxFoQtJLA",
+								"type": "default"
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							},
+							{
+								"key": "",
+								"value": "",
+								"type": "default",
+								"disabled": true
+							}
+						],
+						"url": {
+							"raw": "http://localhost:8080/characters?movies=30, 32",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "8080",
+							"path": [
+								"characters"
+							],
+							"query": [
+								{
+									"key": "name",
+									"value": "Alex",
+									"disabled": true
+								},
+								{
+									"key": "age",
+									"value": "18",
+									"type": "text",
+									"disabled": true
+								},
+								{
+									"key": "movies",
+									"value": "30, 32",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "text",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "characters/{id}",
+					"_postman_id": "c9171276-fb2c-4f09-970c-17a03c0059dc",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU2NDQwLCJpYXQiOjE2NTkxMjA0NDB9.bNA0lOQgihxKfo3ByZgbuEoUMt5fn8m3tVnnMN2KA_Y",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"age\": \"18\",\r\n    \"history\": \"Leon en zoo en NY\",\r\n    \"image\": \"alexLeon.jpg\",\r\n    \"name\": \"Alex\",\r\n    \"weight\": \"180\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": "http://localhost:8080/characters/14"
+					},
+					"response": []
+				},
+				{
+					"name": "characters/{id}",
+					"_postman_id": "2b33d82b-2249-401b-9177-3f2bf73cb4e4",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJwcnVlYmFAZ21haWwuY29tIiwiZXhwIjoxNjU5MTU2NDQwLCJpYXQiOjE2NTkxMjA0NDB9.bNA0lOQgihxKfo3ByZgbuEoUMt5fn8m3tVnnMN2KA_Y",
+								"type": "default"
+							}
+						],
+						"url": "http://localhost:8080/characters/15"
+					},
+					"response": []
+				}
+			],
+			"_postman_id": "d752c980-6fcd-4cf6-ad6c-63d96626f489"
+		}
+	],
+	"auth": {
+		"type": "bearer",
+		"bearer": {}
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "4e5c75da-ae39-4338-aa2c-5c20df48fa80"
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				],
+				"id": "ceb4fd9f-20e5-4995-b7bd-9c6bd6d01c6f"
+			}
+		}
+	]
+}
