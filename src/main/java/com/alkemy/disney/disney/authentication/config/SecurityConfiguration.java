@@ -1,7 +1,7 @@
-package com.alkemy.disney.disney.auth.config;
+package com.alkemy.disney.disney.authentication.config;
 
-import com.alkemy.disney.disney.auth.filter.JwtRequestFilter;
-import com.alkemy.disney.disney.auth.service.UserDetailsCustomService;
+import com.alkemy.disney.disney.authentication.service.filter.JwtRequestFilter;
+import com.alkemy.disney.disney.authentication.service.UserDetailsCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;

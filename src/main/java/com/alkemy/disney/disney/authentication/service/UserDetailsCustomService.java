@@ -1,11 +1,16 @@
-package com.alkemy.disney.disney.auth.service;
+package com.alkemy.disney.disney.authentication.service;
 
-import com.alkemy.disney.disney.auth.dto.UserDTO;
-import com.alkemy.disney.disney.auth.entity.UserEntity;
-import com.alkemy.disney.disney.auth.exception.UserAlreadyExistException;
-import com.alkemy.disney.disney.auth.repository.UserRepository;
+import com.alkemy.disney.disney.authentication.dto.AuthenticationRequest;
+import com.alkemy.disney.disney.authentication.dto.UserDTO;
+import com.alkemy.disney.disney.authentication.entity.UserEntity;
+import com.alkemy.disney.disney.authentication.exception.UserAlreadyExistException;
+import com.alkemy.disney.disney.authentication.repository.UserRepository;
 import com.alkemy.disney.disney.service.impl.EmailServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -24,6 +29,12 @@ public class UserDetailsCustomService implements UserDetailsService {
     private EmailServiceImpl emailService;
     @Autowired
     private PasswordEncoder encoder;
+
+    @Autowired
+    private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private JwtUtils jwtTokenUtil;
 
     @Override
     public UserDetails loadUserByUsername (String userName) throws UsernameNotFoundException {
@@ -50,4 +61,18 @@ public class UserDetailsCustomService implements UserDetailsService {
         }
         return userEntity != null;
     }
+
+    public final String jwtToken (AuthenticationRequest authRequest) throws Exception {
+        UserDetails userDetails;
+        try {
+            Authentication auth = authenticationManager.authenticate(
+                    new UsernamePasswordAuthenticationToken(authRequest.getUsername(), authRequest.getPassword())
+            );
+            userDetails = (UserDetails) auth.getPrincipal();
+        } catch (BadCredentialsException e) {
+            throw new Exception("Incorrect username or password", e);
+        }
+        return jwtTokenUtil.generateToken(userDetails);
+    }
+
 }

@@ -1,4 +1,4 @@
-package com.alkemy.disney.disney.auth.dto;
+package com.alkemy.disney.disney.authentication.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

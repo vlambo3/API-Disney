@@ -1,9 +1,8 @@
-package com.alkemy.disney.disney.auth.filter;
+package com.alkemy.disney.disney.authentication.service.filter;
 
-import com.alkemy.disney.disney.auth.service.JwtUtils;
-import com.alkemy.disney.disney.auth.service.UserDetailsCustomService;
+import com.alkemy.disney.disney.authentication.service.JwtUtils;
+import com.alkemy.disney.disney.authentication.service.UserDetailsCustomService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -23,8 +22,8 @@ public class JwtRequestFilter extends OncePerRequestFilter {
     private UserDetailsCustomService userDetailsCustomService;
     @Autowired
     private JwtUtils jwtUtil;
-    @Autowired
-    private AuthenticationManager authenticationManager;
+    //@Autowired
+    //private AuthenticationManager authenticationManager;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain)

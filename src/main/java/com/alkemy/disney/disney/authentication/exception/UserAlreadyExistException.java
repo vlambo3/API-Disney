@@ -1,4 +1,4 @@
-package com.alkemy.disney.disney.auth.exception;
+package com.alkemy.disney.disney.authentication.exception;
 
 public class UserAlreadyExistException extends Exception {
 

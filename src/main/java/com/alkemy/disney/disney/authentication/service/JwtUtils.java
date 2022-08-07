@@ -1,4 +1,4 @@
-package com.alkemy.disney.disney.auth.service;
+package com.alkemy.disney.disney.authentication.service;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
