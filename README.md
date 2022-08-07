@@ -1,7 +1,7 @@
 # Challenge BackEnd - Java
 
 ## Pre-aceleración ALKEMY
-    CREATE DATABASE disney;
+    
     
 ### Target
   Develop an API using Java SpringBoot and SpringSecurity, following the REST pattern.
@@ -14,27 +14,26 @@
   
 ### Setup Steps
 
-1. Clone repository
+**1. Clone repository**
 
-     [git clone](https://github.com/vlambo3/pre-aceleracion-vanina-godoy) https://github.com/vlambo3/pre-aceleracion-vanina-godoy
+  [git clone](https://github.com/vlambo3/pre-aceleracion-vanina-godoy) 
 
 
-2. Create DataBase in MySQL
-       
+**2. Create DataBase in MySQL**
+```mysql
         CREATE DATABASE disney;
+```
         
-3. Change MySQL server username and password in application.properties file.
+**3. Change MySQL server username and password in application.properties file.**
 
-  * Open  
-  
-      > disney-api/src/main/resources/application.properties
-
+  * Open  `disney-api/src/main/resources/application.properties` file
+      
   * Change the username and password as you have configured your MySQL
 
-      > spring.datasource.username=root
+      + `spring.datasource.username=root`
   
-      > spring.datasource.password=root
+      + `spring.datasource.password=root`
       
-4. Build and Run
+**4. Build and Run**
 
   The app will run at: http://localhost:8080/  
