@@ -1,6 +1,5 @@
 package com.alkemy.disney.disney.service.impl;
 
-import com.alkemy.disney.disney.controller.RestExceptionHandler;
 import com.alkemy.disney.disney.dto.*;
 import com.alkemy.disney.disney.entity.CharacterEntity;
 import com.alkemy.disney.disney.entity.MovieEntity;
